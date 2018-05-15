@@ -1,0 +1,37 @@
+/*
+Error: Invalid CSS after "onChangeCallback": expected "{", was ""
+        on line 1 of three.js.scss
+
+1: onChangeCallback
+
+Backtrace:
+three.js.scss:1
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:1278:in `expected'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:1208:in `expected'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:1203:in `tok!'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:677:in `block'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:670:in `ruleset'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:696:in `block_child'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:686:in `block_contents'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:137:in `stylesheet'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/scss/parser.rb:41:in `parse'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/engine.rb:414:in `_to_tree'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/plugin.rb:82:in `update_stylesheets'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/exec/base.rb:52:in `parse'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/lib/sass/exec/base.rb:19:in `parse!'
+/Users/dmallcd/.rvm/gems/ruby-2.2.4/gems/sass-3.5.6/bin/scss:13:in `<top (required)>'
+/usr/local/bin/scss:23:in `load'
+/usr/local/bin/scss:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"onChangeCallback\": expected \"{\", was \"\"\A         on line 1 of three.js.scss\A \A 1: onChangeCallback"; }

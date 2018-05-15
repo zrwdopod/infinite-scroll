@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品陈列</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="../../lib/three/three.js"></script>
+    <script src="../../lib/three/TrackballControls.js"></script>
+    <script src="../../lib/three/TDSLoader.js"></script>
+
+</head>
+<body>
+<script>
+    //    var scene = new THREE.Scene();
+    //    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    //
+    //    var renderer = new THREE.WebGLRenderer();
+    //    renderer.setSize(window.innerWidth, window.innerHeight);
+    //    document.body.appendChild(renderer.domElement);
+    //
+    //    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    //    var material = new THREE.MeshBasicMaterial({
+    //        color: 0x00ff00
+    //    });
+    //    var cube = new THREE.Mesh(geometry, material);
+    //    scene.add(cube);
+    //
+    //    camera.position.z = 3;
+    //    controls = new THREE.TrackballControls( camera );
+    //
+    //    var render = function() {
+    //        requestAnimationFrame(render);
+    //
+    ////        cube.rotation.x += 0.01;
+    ////        cube.rotation.y += 0.01;
+    //
+    //        renderer.render(scene, camera);
+    //    };
+    //
+    //    render();
+    //
+    //
+    //    window.addEventListener('resize', onResize, false);
+    //    function onResize () {
+    //        // 设置透视摄像机的长宽比
+    //        camera.aspect = window.innerWidth / window.innerHeight;
+    //        // 摄像机的 position 和 target 是自动更新的，而 fov、aspect、near、far 的修改则需要重新计算投影矩阵（projection matrix）
+    //        camera.updateProjectionMatrix();
+    //        // 设置渲染器输出的 canvas 的大小
+    //        renderer.setSize(window.innerWidth, window.innerHeight)
+    //    }
+    //
+
+
+    var container, controls;
+    var camera, scene, renderer;
+    //    init();
+    //    animate();
+
+    var materials = [];
+    var textureLoader;
+
+
+    loadAssets();
+
+    function loadAssets() {
+        textureLoader = new THREE.TextureLoader();
+        load_textures(['assets/textures/01.png', 'assets/textures/02.png', 'assets/textures/03.png', 'assets/textures/04.png', 'assets/textures/05.png', 'assets/textures/06.png'], 0)
+    }
+
+    //加载纹理
+    function load_textures(to_load, loadedIndex) {
+        if (loadedIndex == to_load.length) {
+            init();   //加载纹理完毕后开始初始化并渲染场景
+            return;
+        }
+        textureLoader.load(to_load[loadedIndex], function (tex) {
+            materials[loadedIndex] = (new THREE.MeshBasicMaterial({map: tex, overdraw: true}));
+            load_textures(to_load, loadedIndex + 1);
+        });
+    }
+
+
+    function init() {
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 10);
+        camera.position.z = 2;
+        controls = new THREE.TrackballControls(camera);
+        scene = new THREE.Scene();
+        scene.add(new THREE.HemisphereLight());
+        var directionalLight = new THREE.DirectionalLight(0xffeedd);
+        directionalLight.position.set(0, 0, 0);
+        scene.add(directionalLight);
+//        var loader = new THREE.TextureLoader();
+//        var normal = loader.load('assets/textures/normal.jpg');
+//        var loader = new THREE.TDSLoader();
+//        loader.setPath('assets/textures/');
+//        loader.load('assets/portalgun.3ds', function (object) {
+//            object.traverse(function (child) {
+//                if (child instanceof THREE.Mesh) {
+//                    child.material.normalMap = normal;
+//                }
+//            });
+//            scene.add(object);
+//        });
+
+        var cube = new THREE.Mesh(
+            new THREE.CubeGeometry(1, 1, 1),
+            new THREE.MultiMaterial(materials)
+        );
+        scene.add(cube);
+
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+        window.addEventListener('resize', resize, false);
+        animate();
+    }
+
+    function resize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    //    controls.object.quaternion.onChangeCallback = function () {
+    //    };
+
+    //    console.log(controls.object.rotation);
+    //    console.log(controls.object.rotation.onChangeCallback);
+    //    setInterval(function () {
+    //        console.log(controls.object.rotation);
+    //    },10000);
+    function notMe(axis) {
+        return axis > -1 && axis < 1;
+    }
+
+    function setCameraPeace() {
+        if (camera.position.x > 1 && notMe(camera.position.y) && notMe(camera.position.z)) {
+            camera.position.set(2, 0, 0);
+        }
+        if (camera.position.y > 1 && notMe(camera.position.x) && notMe(camera.position.z)) {
+            camera.position.set(0, 2, 0);
+
+        }
+        if (camera.position.z > 1 && notMe(camera.position.x) && notMe(camera.position.y)) {
+            camera.position.set(0, 0, 2);
+        }
+        if (camera.position.x < -1 && notMe(camera.position.y) && notMe(camera.position.z)) {
+            camera.position.set(-2, 0, 0);
+
+        }
+        if (camera.position.y < -1 && notMe(camera.position.x) && notMe(camera.position.z)) {
+            camera.position.set(0, -2, 0);
+
+        }
+        if (camera.position.z < -1 && notMe(camera.position.x) && notMe(camera.position.y)) {
+            camera.position.set(0, 0, -2);
+        }
+    }
+
+    function animate() {
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+    }
+
+
+    //    var camera, scene, renderer;
+    //    var geometry, material, mesh;
+    //
+    //    init();
+    //    animate();
+    //
+    //
+    //    function addDatGui(){
+    //        var gui = new DAT.GUI();
+    //
+    //        gui.add(camera.position, 'x', -500,500).step(5);
+    //        gui.add(camera.position, 'y', -500,500).step(5);
+    //        gui.add(camera.position, 'z', 1000,5000).step(5);
+    //
+    //
+    //    }
+    //    function init() {
+    //
+    //        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    //        camera.position.z = 1000;
+    //
+    //        scene = new THREE.Scene();
+    //
+    //        geometry = new THREE.CubeGeometry( 200, 200, 200 );
+    //        material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+    //
+    //        mesh = new THREE.Mesh( geometry, material );
+    //        scene.add( mesh );
+    //
+    //        renderer = new THREE.CanvasRenderer();
+    //        renderer.setSize( window.innerWidth, window.innerHeight );
+    //
+    //        document.body.appendChild( renderer.domElement );
+    //
+    //        addDatGui();
+    //
+    //    }
+    //
+    //    function animate() {
+    //
+    //        // note: three.js includes requestAnimationFrame shim
+    //        requestAnimationFrame( animate );
+    //
+    //        mesh.rotation.x += 0.01;
+    //        mesh.rotation.y += 0.02;
+    //
+    //        renderer.render( scene, camera );
+    //
+    //    }
+
+</script>
+
+</body>
+</html>

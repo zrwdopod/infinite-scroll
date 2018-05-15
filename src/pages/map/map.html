@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../libs/three.js"></script>
+    <script type="text/javascript" src="../libs/stats.js"></script>
+    <script src="../libs/OrbitControls.js"></script>
+
+    <style>
+        .box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .square {
+            width: 600px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .square .text{
+            font-size: 266px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .square:nth-child(1) {
+            background: #f00;
+        }
+
+        .square:nth-child(2) {
+            background: #0f0;
+        }
+
+        .square:nth-child(3) {
+            background: #00f;
+        }
+
+        .square:nth-child(4) {
+            background: #600;
+        }
+
+        .square:nth-child(5) {
+            background: #080;
+        }
+
+        .square:nth-child(6) {
+            background: #008;
+        }
+    </style>
+</head>
+<body>
+<ul class="box">
+    <li class="square"><span class="text">1</span></li>
+    <li class="square"><span class="text">2</span></li>
+    <li class="square"><span class="text">3</span></li>
+    <li class="square"><span class="text">4</span></li>
+    <li class="square"><span class="text">5</span></li>
+    <li class="square"><span class="text">6</span></li>
+</ul>
+</body>
+</html>

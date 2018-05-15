@@ -1,0 +1,42 @@
+@import "px2rem";
+@import "normalize";
+@import "reset";
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.head{
+  width: 100%;
+  height:px2rem(100px);
+}
+.app {
+  width: 100%;
+
+  height: calc(100% - 200px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  .page {
+    .infinite {
+      display: flex;
+      flex-direction: column;
+      .item {
+        box-sizing: border-box;
+        width: px2rem(750px);
+        height: px2rem(100px);
+        border: solid px2rem(2px);
+        border: {
+          bottom: none;
+        }
+      ;
+      }
+    }
+  }
+}
